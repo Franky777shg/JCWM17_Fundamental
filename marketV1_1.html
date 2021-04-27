@@ -1,0 +1,16 @@
+<script>
+    let apel = 10_000
+    let anggur = 15_000
+    let pisang = 20_000
+
+    let qtyApel = +prompt(`🍎 Apel = Rp${apel.toLocaleString()}/buah. Berapa jumlah Apel yang ingin dibeli?`)
+    let qtyAnggur = +prompt(`🍇 Anggur = Rp${anggur.toLocaleString()}/buah. Berapa jumlah Anggur yang ingin dibeli?`)
+    let qtyPisang = +prompt(`🍌 Pisang = Rp${pisang.toLocaleString()}/buah. Berapa jumlah Pisang yang ingin dibeli?`)
+    // console.log(qtyApel, qtyAnggur, qtyPisang)
+
+    alert(`List belanja Anda:
+    1.🍎 Apel, Rp${apel.toLocaleString()} x ${qtyApel} = Rp${(apel*qtyApel).toLocaleString()}
+    2.🍇 Anggur, Rp${anggur.toLocaleString()} x ${qtyAnggur} = Rp${(anggur*qtyAnggur).toLocaleString()}
+    3.🍌 Pisang, Rp${pisang.toLocaleString()} x ${qtyPisang} = Rp${(pisang*qtyPisang).toLocaleString()}
+    Total belanja Anda = Rp${((apel*qtyApel) + (anggur*qtyAnggur) + (pisang*qtyPisang)).toLocaleString()}`)
+</script>
