@@ -44,11 +44,11 @@ console.log(Math.max(1, 3, 5)) // mencari data tertinggi
 console.log(Math.random()) // menghasilkan angka random dari 0 sampai 1
 
 // parsing data
-let a = "123"
-console.log(parseInt(a)) // mengubah data menjadi integer
-console.log(parseFloat(a)) // mengubah data menjadi float
-let c = "123.57"
-console.log(parseInt(c))
-console.log(parseFloat(c))
+let k = "123"
+console.log(parseInt(k)) // mengubah data menjadi integer
+console.log(parseFloat(k)) // mengubah data menjadi float
+let l = "123.57"
+console.log(parseInt(l))
+console.log(parseFloat(l))
 // let b = "Nafis"
 // console.log(parseInt(b))
