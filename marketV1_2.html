@@ -1,0 +1,44 @@
+<script>
+    let apel = 10_000,
+        anggur = 15_000,
+        pisang = 20_000,
+        stokApel = 5,
+        stokAnggur = 5,
+        stokPisang = 5,
+        totalPrice = 0
+
+    let qtyApel = +prompt(`🍎 Apel = Rp${apel.toLocaleString()}/buah. Stock = ${stokApel}. Berapa jumlah Apel yang ingin dibeli?`)
+    if (qtyApel > stokApel) {
+        alert(`Pembelian untuk Apel melebihi stok, jumlah pembelian akan disesuaikan dengan stok yang ada yaitu ${stokApel}`)
+        qtyApel = stokApel
+    }
+
+    let qtyAnggur = +prompt(`🍇 Anggur = Rp${anggur.toLocaleString()}/buah. Stock = ${stokAnggur}. Berapa jumlah Anggur yang ingin dibeli?`)
+    if (qtyAnggur > stokAnggur) {
+        alert(`Pembelian untuk Anggur melebihi stok, jumlah pembelian akan disesuaikan dengan stok yang ada yaitu ${stokAnggur}`)
+        qtyAnggur = stokAnggur
+    }
+
+    let qtyPisang = +prompt(`🍌 Pisang = Rp${pisang.toLocaleString()}/buah. Stock = ${stokPisang}. Berapa jumlah Pisang yang ingin dibeli?`)
+    if (qtyPisang > stokPisang) {
+        alert(`Pembelian untuk Pisang melebihi stok, jumlah pembelian akan disesuaikan dengan stok yang ada yaitu ${stokPisang}`)
+        qtyPisang = stokPisang
+    }
+
+    totalPrice += (apel*qtyApel) + (anggur*qtyAnggur) + (pisang*qtyPisang)
+
+    let nominal = +prompt(`List belanja Anda:
+    1.🍎 Apel, Rp${apel.toLocaleString()} x ${qtyApel} = Rp${(apel*qtyApel).toLocaleString()}
+    2.🍇 Anggur, Rp${anggur.toLocaleString()} x ${qtyAnggur} = Rp${(anggur*qtyAnggur).toLocaleString()}
+    3.🍌 Pisang, Rp${pisang.toLocaleString()} x ${qtyPisang} = Rp${(pisang*qtyPisang).toLocaleString()}
+    Total belanja Anda = Rp${totalPrice.toLocaleString()}
+    Tolong input nominal uang untuk pembayaran:`)
+
+    if (nominal < totalPrice) {
+        alert(`Pembelian dibatalkan karena uang yang Anda masukan kurang dari total belanja yaitu Rp${totalPrice.toLocaleString()}`)
+    } else if (nominal == totalPrice) {
+        alert(`Terima Kasih`)
+    } else if (nominal > totalPrice) {
+        alert(`Terima kasih, uang kembalian anda Rp${(nominal - totalPrice).toLocaleString()}`)
+    }
+</script>
