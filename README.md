@@ -1,13 +1,10 @@
 Lesson Today:
 <ol>
-<li>Boolean</li>
-<li>Comparison Operator</li>
-<li>Double & Triple Equal Operator</li>
-<li>Logical Operator</li>
-<li>Syntax IF ELSE IF ELSE</li>
-<li>Switch Case</li>
-<li>Falsy and Truthy Value</li>
-<li>Exercise Conditional Statement</li>
-<li>Introduction To Loop</li>
-<li>What, When, Why, How Loop</li>
+<li>While Loop</li>
+<li>Do While Loop</li>
+<li>For Loop</li>
+<li>Continue & Break</li>
+<li>Loop Drawing</li>
+<li>Speed, Space, and Maintainability</li>
+<li>Exercise</li>
 </ol>
