@@ -18,12 +18,41 @@
 
             alert(list)
         } else if (menuUtama === 2) {
-            let name = prompt('Input nama buah:')
-            let price = +prompt('Input harga buah:')
-            let stock = +prompt('Input stok buah:')
-            console.log(name, price, stock)
+            let newData = []
+            let name
 
-            fruits.push([name, price, stock])
+            while (true) {
+                let nameInput = prompt('Input nama buah:')
+                if (!nameInput) {
+                    alert('Tolong input yang benar')
+                } else {
+                    newData.push(nameInput)
+                    name = nameInput
+                    break
+                }
+            }
+
+            while (true) {
+                let price = +prompt('Input harga buah:')
+                if (!price) {
+                    alert('Tolong input yang benar')
+                } else {
+                    newData.push(price)
+                    break
+                }
+            }
+
+            while (true) {
+                let stock = +prompt('Input stok buah:')
+                if (!stock) {
+                    alert('Tolong input yang benar')
+                } else {
+                    newData.push(stock)
+                    break
+                }
+            }
+
+            fruits.push(newData)
 
             alert(`Data buah ${name} sudah dimasukan ke database`)
         } else if (menuUtama === 3) {
@@ -38,7 +67,28 @@
 
             alert(`Data buah ke - ${index} sudah terhapus dari database`)
         } else if (menuUtama === 4) {
-            alert(4)
+            while (true) {
+                let list = 'Daftar Buah di Toko Buah Fresh: \n'
+                for (let i = 0; i < fruits.length; i++) {
+                    list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
+                }
+                list += 'Buah nomor berapa yang ingin Anda beli?'
+    
+                let index = +prompt(list)
+                
+                while (true) {
+                    let qty = prompt(`Berapa ${fruits[index - 1][0]} yang ingin Anda beli? *Stok = ${fruits[index - 1][2]}`)
+
+                    if(qty > fruits[index - 1][2]) {
+                        alert('Quantity melebihi stok produk, mohon input sesuai stok yang ada')
+                    } else if (qty <= fruits[index - 1][2]) {
+                        console.log('oke')
+                        break
+                    }
+                }
+                let konfirmasi = confirm('Apakah Anda mau membeli buah yang lain?')
+                if (!konfirmasi) break
+            }
         } else if (menuUtama === 5) {
             alert('Terima kasih! Silahkan datang di lain waktu')
             break
