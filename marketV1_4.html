@@ -1,6 +1,6 @@
 <script>
     let fruits = [['Apel', 10_000, 5], ['Anggur', 15_000, 5], ['Pisang', 20_000, 5]]
-    let cart = []
+    let cart = [['Apel', 10000, 2]]
     let totalPrice = 0
 
     while (true) {
@@ -82,17 +82,41 @@
                 // looping untuk meminta jumlah pembelian
                 while (true) {
                     // minta user untuk menentukan qty pembelian produk
-                    let qty = prompt(`Berapa ${fruits[index - 1][0]} yang ingin Anda beli? *Stok = ${fruits[index - 1][2]}`)
+                    let qty = +prompt(`Berapa ${fruits[index - 1][0]} yang ingin Anda beli? *Stok = ${fruits[index - 1][2]}`)
 
                     if (qty > fruits[index - 1][2]) {
                         // kalau qty melebihi stok, maka akn muncul alert, kemudian kembali lagi meminta qty
                         alert('Quantity melebihi stok produk, mohon input sesuai stok yang ada')
                     } else if (qty <= fruits[index - 1][2]) {
                         // kalau qty sesuai stok, data buah dimasukan ke dalam cart
-                        cart.push([fruits[index - 1][0], fruits[index - 1][1], qty])
+                        // jika data sudah ada maka quantitas nya yang akan ditambahkan dan tidak mem-push data baru
 
-                        // untuk menghitung total price
-                        totalPrice += fruits[index - 1][1] * qty
+                        // cek apakah ada data yang sama di cart
+                        let ind = null
+                        for (let i = 0; i < cart.length; i++) {
+                            if (cart[i][0] === fruits[index - 1][0]) {
+                                ind = i
+                            }
+                        }
+
+                        if (ind === null) {
+                            // kalau ind kosong, push data baru
+                            cart.push([fruits[index - 1][0], fruits[index - 1][1], qty])
+                        } else {
+                            // kalau ind ada, update qty
+                            let temp = cart[ind][2] + qty
+                            cart[ind][2] = temp
+                        }
+
+                        // untuk menghitung total price (alternatif 1)
+                        // totalPrice += fruits[index - 1][1] * qty
+
+                        // untuk menghitung total price (alternatif 2)
+                        let count = 0
+                        for (let i = 0; i < cart.length; i++) {
+                            count += cart[i][1] * cart[i][2]
+                        }
+                        totalPrice = count
 
                         alert(`Buah ${fruits[index - 1][0]} sudah dimasukan ke dalam keranjang`)
 
@@ -121,10 +145,10 @@
                     keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
                 }
                 keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}\nTolong input nominal untuk pembayaran:`
-    
+
                 let nominal = +prompt(keranjang)
 
-                if(nominal < totalPrice) {
+                if (nominal < totalPrice) {
                     // kalau uang nya kurang
                     alert(`Mohon input nilai yang sesuai dengan total belanja yaitu Rp${totalPrice.toLocaleString()}`)
                 } else if (nominal === totalPrice) {
