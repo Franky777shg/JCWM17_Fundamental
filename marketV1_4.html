@@ -13,14 +13,30 @@
         if (menuUtama === 1) {
             let list = 'Daftar Buah di Toko Buah Fresh: \n'
             for (let i = 0; i < fruits.length; i++) {
-                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
+                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
             }
 
             alert(list)
         } else if (menuUtama === 2) {
-            alert(2)
+            let name = prompt('Input nama buah:')
+            let price = +prompt('Input harga buah:')
+            let stock = +prompt('Input stok buah:')
+            console.log(name, price, stock)
+
+            fruits.push([name, price, stock])
+
+            alert(`Data buah ${name} sudah dimasukan ke database`)
         } else if (menuUtama === 3) {
-            alert(3)
+            let list = 'Daftar Buah di Toko Buah Fresh: \n'
+            for (let i = 0; i < fruits.length; i++) {
+                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
+            }
+            list += 'Buah nomor berapa yang ingin Anda hapus?'
+
+            let index = +prompt(list)
+            fruits.splice(index - 1, 1)
+
+            alert(`Data buah ke - ${index} sudah terhapus dari database`)
         } else if (menuUtama === 4) {
             alert(4)
         } else if (menuUtama === 5) {
