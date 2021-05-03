@@ -68,7 +68,9 @@
 
             alert(`Data buah ke - ${index} sudah terhapus dari database`)
         } else if (menuUtama === 4) {
+            // while ini adalah looping besar untuk membeli buah 
             while (true) {
+                // menampilkan daftar buah sekaligus meminta user memilih buah mana yang akan dibeli
                 let list = 'Daftar Buah di Toko Buah Fresh: \n'
                 for (let i = 0; i < fruits.length; i++) {
                     list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
@@ -78,17 +80,22 @@
                 let index = +prompt(list)
 
                 while (true) {
+                    // minta user untuk menentukan qty pembelian produk
                     let qty = prompt(`Berapa ${fruits[index - 1][0]} yang ingin Anda beli? *Stok = ${fruits[index - 1][2]}`)
 
                     if (qty > fruits[index - 1][2]) {
+                        // kalau qty melebihi stok, maka akn muncul alert, kemudian kembali lagi meminta qty
                         alert('Quantity melebihi stok produk, mohon input sesuai stok yang ada')
                     } else if (qty <= fruits[index - 1][2]) {
+                        // kalau qty sesuai stok, data buah dimasukan ke dalam cart
                         cart.push([fruits[index - 1][0], fruits[index - 1][1], qty])
 
+                        // untuk menghitung total price
                         totalPrice += fruits[index - 1][1] * qty
 
                         alert(`Buah ${fruits[index - 1][0]} sudah dimasukan ke dalam keranjang`)
 
+                        // setiap berhasil menambah kan barang ke cart, maka akan muncul isi cart
                         let keranjang = 'Daftar keranjang Anda: \n'
                         for (let i = 0; i < cart.length; i++) {
                             keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
@@ -98,16 +105,36 @@
                         break
                     }
                 }
+                // konfirmasi ke user, apakah ingin membeli buah lagi
                 let konfirmasi = confirm('Apakah Anda mau membeli buah yang lain?')
-                if (!konfirmasi) break
 
+                // kalau user sudah selesai membeli buah, maka looping pembelian buah akan berhenti, dan lanjut ke proses payment
+                if (!konfirmasi) break
+            }
+
+            // ini looping besar untuk payment
+            while (true) {
+                // untuk menampilkan isi keranjang sekaligus meminta input nominal pembayaran
                 let keranjang = 'Daftar keranjang Anda: \n'
                 for (let i = 0; i < cart.length; i++) {
                     keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
                 }
-                keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}`
+                keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}\nTolong input nominal untuk pembayaran:`
+    
+                let nominal = +prompt(keranjang)
 
-                alert(keranjang)
+                if(nominal < totalPrice) {
+                    // kalau uang nya kurang
+                    alert(`Mohon input nilai yang sesuai dengan total belanja yaitu Rp${totalPrice.toLocaleString()}`)
+                } else if (nominal === totalPrice) {
+                    // kalau uang nya pas maka looping payment stop
+                    alert('Terima Kasih! Pesanan Anda akan segera diantar')
+                    break
+                } else if (nominal > totalPrice) {
+                    // kalau uang ya lebih maka looping payment stop dan diinformasikan kembalian nya
+                    alert(`Terima kasih! Uang kembalian Anda Rp${(nominal - totalPrice).toLocaleString()}\nPesanan Anda akan segera diantar`)
+                    break
+                }
             }
         } else if (menuUtama === 5) {
             alert('Terima kasih! Silahkan datang di lain waktu')
