@@ -1,6 +1,7 @@
 <script>
     let fruits = [['Apel', 10_000, 5], ['Anggur', 15_000, 5], ['Pisang', 20_000, 5]]
     let cart = []
+    let totalPrice = 0
 
     while (true) {
         let menuUtama = +prompt(`Selamat Datang di Toko Buah Fresh.
@@ -13,7 +14,7 @@
         if (menuUtama === 1) {
             let list = 'Daftar Buah di Toko Buah Fresh: \n'
             for (let i = 0; i < fruits.length; i++) {
-                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
+                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
             }
 
             alert(list)
@@ -58,7 +59,7 @@
         } else if (menuUtama === 3) {
             let list = 'Daftar Buah di Toko Buah Fresh: \n'
             for (let i = 0; i < fruits.length; i++) {
-                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
+                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
             }
             list += 'Buah nomor berapa yang ingin Anda hapus?'
 
@@ -70,24 +71,43 @@
             while (true) {
                 let list = 'Daftar Buah di Toko Buah Fresh: \n'
                 for (let i = 0; i < fruits.length; i++) {
-                    list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`                
+                    list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
                 }
                 list += 'Buah nomor berapa yang ingin Anda beli?'
-    
+
                 let index = +prompt(list)
-                
+
                 while (true) {
                     let qty = prompt(`Berapa ${fruits[index - 1][0]} yang ingin Anda beli? *Stok = ${fruits[index - 1][2]}`)
 
-                    if(qty > fruits[index - 1][2]) {
+                    if (qty > fruits[index - 1][2]) {
                         alert('Quantity melebihi stok produk, mohon input sesuai stok yang ada')
                     } else if (qty <= fruits[index - 1][2]) {
-                        console.log('oke')
+                        cart.push([fruits[index - 1][0], fruits[index - 1][1], qty])
+
+                        totalPrice += fruits[index - 1][1] * qty
+
+                        alert(`Buah ${fruits[index - 1][0]} sudah dimasukan ke dalam keranjang`)
+
+                        let keranjang = 'Daftar keranjang Anda: \n'
+                        for (let i = 0; i < cart.length; i++) {
+                            keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
+                        }
+                        keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}`
+                        alert(keranjang)
                         break
                     }
                 }
                 let konfirmasi = confirm('Apakah Anda mau membeli buah yang lain?')
                 if (!konfirmasi) break
+
+                let keranjang = 'Daftar keranjang Anda: \n'
+                for (let i = 0; i < cart.length; i++) {
+                    keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
+                }
+                keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}`
+
+                alert(keranjang)
             }
         } else if (menuUtama === 5) {
             alert('Terima kasih! Silahkan datang di lain waktu')
