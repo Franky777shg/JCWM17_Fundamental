@@ -3,6 +3,27 @@
     let cart = []
     let totalPrice = 0
 
+    // function untuk menampilkan daftar buah
+    let showList = () => {
+        let res = 'Daftar Buah di Toko Buah Fresh: \n'
+        fruits.forEach((item, index) => {
+            res += `${index + 1}. ${item[0]} = Rp${item[1].toLocaleString()}/buah. Stok = ${item[2]}\n`
+        })
+
+        return res
+    }
+
+    // function untuk menampilkan daftar isi keranjang
+    let showCart = () => {
+        let res = 'Daftar keranjang Anda: \n'
+        cart.forEach((item, index) => {
+            res += `${index + 1}. ${item[0]}, Rp${item[1].toLocaleString()} x ${item[2]} = Rp${(item[1] * item[2]).toLocaleString()}\n`
+        })
+        res += `Total belanja Anda = Rp${totalPrice.toLocaleString()}\n`
+
+        return res
+    }
+
     while (true) {
         let menuUtama = +prompt(`Selamat Datang di Toko Buah Fresh.
         1. Daftar Buah
@@ -12,10 +33,11 @@
         5. Exit`)
 
         if (menuUtama === 1) {
-            let list = 'Daftar Buah di Toko Buah Fresh: \n'
-            for (let i = 0; i < fruits.length; i++) {
-                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
-            }
+            // let list = 'Daftar Buah di Toko Buah Fresh: \n'
+            // fruits.forEach((item, index) => {
+            //     list += `${index + 1}. ${item[0]} = Rp${item[1].toLocaleString()}/buah. Stok = ${item[2]}\n`
+            // })
+            let list = showList()
 
             alert(list)
         } else if (menuUtama === 2) {
@@ -57,10 +79,11 @@
 
             alert(`Data buah ${name} sudah dimasukan ke database`)
         } else if (menuUtama === 3) {
-            let list = 'Daftar Buah di Toko Buah Fresh: \n'
-            for (let i = 0; i < fruits.length; i++) {
-                list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
-            }
+            // let list = 'Daftar Buah di Toko Buah Fresh: \n'
+            // fruits.forEach((item, index) => {
+            //     list += `${index + 1}. ${item[0]} = Rp${item[1].toLocaleString()}/buah. Stok = ${item[2]}\n`
+            // })
+            let list = showList()
             list += 'Buah nomor berapa yang ingin Anda hapus?'
 
             let index = +prompt(list)
@@ -71,10 +94,11 @@
             // while ini adalah looping besar untuk membeli buah 
             while (true) {
                 // menampilkan daftar buah sekaligus meminta user memilih buah mana yang akan dibeli
-                let list = 'Daftar Buah di Toko Buah Fresh: \n'
-                for (let i = 0; i < fruits.length; i++) {
-                    list += `${i + 1}. ${fruits[i][0]} = Rp${fruits[i][1].toLocaleString()}/buah. Stok = ${fruits[i][2]}\n`
-                }
+                // let list = 'Daftar Buah di Toko Buah Fresh: \n'
+                // fruits.forEach((item, index) => {
+                //     list += `${index + 1}. ${item[0]} = Rp${item[1].toLocaleString()}/buah. Stok = ${item[2]}\n`
+                // })
+                let list = showList()
                 list += 'Buah nomor berapa yang ingin Anda beli?'
 
                 let index = +prompt(list)
@@ -93,11 +117,11 @@
 
                         // cek apakah ada data yang sama di cart
                         let ind = null
-                        for (let i = 0; i < cart.length; i++) {
-                            if (cart[i][0] === fruits[index - 1][0]) {
-                                ind = i
+                        cart.forEach((item, indexCart) => {
+                            if (item[0] === fruits[index - 1][0]) {
+                                ind = indexCart
                             }
-                        }
+                        })
 
                         if (ind === null) {
                             // kalau ind kosong, push data baru
@@ -113,19 +137,21 @@
 
                         // untuk menghitung total price (alternatif 2)
                         let count = 0
-                        for (let i = 0; i < cart.length; i++) {
-                            count += cart[i][1] * cart[i][2]
-                        }
+                        cart.forEach(item => {
+                            count += item[1] * item[2]
+                        })
+
                         totalPrice = count
 
                         alert(`Buah ${fruits[index - 1][0]} sudah dimasukan ke dalam keranjang`)
 
                         // setiap berhasil menambah kan barang ke cart, maka akan muncul isi cart
-                        let keranjang = 'Daftar keranjang Anda: \n'
-                        for (let i = 0; i < cart.length; i++) {
-                            keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
-                        }
-                        keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}`
+                        // let keranjang = 'Daftar keranjang Anda: \n'
+                        // cart.forEach((item, index) => {
+                        //     keranjang += `${index + 1}. ${item[0]}, Rp${item[1].toLocaleString()} x ${item[2]} = Rp${(item[1] * item[2]).toLocaleString()}\n`
+                        // })
+                        // keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}`
+                        let keranjang = showCart()
                         alert(keranjang)
                         break
                     }
@@ -140,11 +166,13 @@
             // ini looping besar untuk payment
             while (true) {
                 // untuk menampilkan isi keranjang sekaligus meminta input nominal pembayaran
-                let keranjang = 'Daftar keranjang Anda: \n'
-                for (let i = 0; i < cart.length; i++) {
-                    keranjang += `${i + 1}. ${cart[i][0]}, Rp${cart[i][1].toLocaleString()} x ${cart[i][2]} = Rp${(cart[i][1] * cart[i][2]).toLocaleString()}\n`
-                }
-                keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}\nTolong input nominal untuk pembayaran:`
+                // let keranjang = 'Daftar keranjang Anda: \n'
+                // cart.forEach((item, index) => {
+                //     keranjang += `${index + 1}. ${item[0]}, Rp${item[1].toLocaleString()} x ${item[2]} = Rp${(item[1] * item[2]).toLocaleString()}\n`
+                // })
+                // keranjang += `Total belanja Anda = Rp${totalPrice.toLocaleString()}\nTolong input nominal untuk pembayaran:`
+                let keranjang = showCart()
+                keranjang += 'Tolong input nominal untuk pembayaran:'
 
                 let nominal = +prompt(keranjang)
 
