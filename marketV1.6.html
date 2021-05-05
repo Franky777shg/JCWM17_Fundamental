@@ -1,0 +1,137 @@
+<script>
+    let products = [
+        {
+            name: 'Apple',
+            price: 10000,
+            stock: 5,
+            sugarLevel: 'Medium',
+            category: 'Fruit'
+        },
+        {
+            name: 'French Fries',
+            price: 15000,
+            stock: 7,
+            expired: 2022,
+            category: 'Fast Food'
+        },
+        {
+            name: 'Pants',
+            price: 20000,
+            stock: 9,
+            size: 'M',
+            category: 'Cloth'
+        },
+        {
+            name: 'Iron',
+            price: 25000,
+            stock: 11,
+            warranty: true,
+            category: 'Electronic'
+        }
+    ]
+
+    let cart = []
+    let totalPrice = 0
+
+    class Product {
+        constructor(name, price, stock) {
+            this.name = name,
+            this.price = price,
+            this.stock = stock
+        }
+    }
+    
+    class Fruit extends Product {
+        constructor(name, price, stock, cate, sugar) {
+            super(name, price, stock)
+            this.sugarLevel = sugar
+            this.category = cate
+        }
+    }
+
+    class FastFood extends Product {
+        constructor(name, price, stock, cate, exp) {
+            super(name, price, stock)
+            this.expired = exp
+            this.category = cate
+        }
+    }
+
+    class Cloth extends Product {
+        constructor(name, price, stock, cate, size) {
+            super(name, price, stock)
+            this.size = size
+            this.category = cate
+        }
+    }
+
+    class Elect extends Product {
+        constructor(name, price, stock, cate, war) {
+            super(name, price, stock)
+            this.warranty = war
+            this.category = cate
+        }
+    }
+
+    // function untuk menampilkan daftar buah
+    let showList = () => {
+        let res = 'Daftar Barang di Toserba: \n'
+        products.forEach((item, index) => {
+            let temp = `${index + 1}. `
+            for(let prop in item) {
+                if(prop === 'category') {
+                    temp += `${item[prop]}.`
+                } else {
+                    temp += `${item[prop]}, `
+                }
+            }
+            res += temp + '\n'
+        })
+
+        return res
+    }
+
+    while (true) {
+        let menuUtama = +prompt(`Selamat Datang di Toserba.
+        1. Daftar Barang
+        2. Tambah Barang
+        3. Hapus Barang
+        4. Beli Barang
+        5. Exit`)
+
+        if (menuUtama === 1) {
+            let list = showList()
+            alert(list)
+        } else if (menuUtama === 2) {
+            while(true) {
+                let idCate = +prompt(`Produk dengan kategori apa yang ingin ditamabah?
+                1. Fruit
+                2. Fast Food
+                3. Cloth
+                4. Electronic`)
+
+                if (idCate === 1) {
+                    let name = prompt('Apa nama barangnya:')
+                    let price = +prompt('Berapa harga barangnya:')
+                    let stock = +prompt('Berapa stock barangnya:')
+                    let sugar = prompt('Bagaimana kadar gula barangnya: (Tulis Low, Medium, atau High)')
+
+                    let buah = new Fruit(name, price, stock, 'Fruit', sugar)
+                    products.push(buah)
+
+                    alert(`Data barang ${name} sudah dimasukan ke dalam database!`)
+
+                    let konfirmasi = confirm('Mau tambah barang lagi?')
+                    if(!konfirmasi) break
+                }
+            }
+        } else if (menuUtama === 3) {
+        } else if (menuUtama === 4) {
+        } else if (menuUtama === 5) {
+            alert('Terima kasih! Silahkan datang di lain waktu')
+            break
+        } else {
+            alert('Menu tidak ada! Tolong input menu dengan benar')
+        }
+    }
+</script>
