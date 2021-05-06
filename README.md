@@ -1,21 +1,14 @@
 Lesson Today:
-<h1>Function</h1>
+<h1>Object</h1>
 <ol>
 <li>Introduction</li>
 <li>What Why When</li>
-<li>Syntax Function</li>
-<li>Without Parameter and Return
-Value</li>
-<li>Parameter</li>
-<li>Return</li>
-<li>Parameter and Return</li>
-<li>Parameter or Argument</li>
-<li>Default Parameter</li>
-<li>Callback Function</li>
-<li>Calling Other Function</li>
-<li>Array Method (Advanced)</li>
-<li>forEach</li>
-<li>map</li>
-<li>filter</li>
-<li>Variable Scope</li>
+<li>Syntax Literal</li>
+<li>This Keyword</li>
+<li>Class</li>
+<li>Syntax Class</li>
+<li>What When Why Class</li>
+<li>Inheritance</li>
+<li>Every Data Types Are Object</li>
+<li>Exercise</li>
 </ol>
