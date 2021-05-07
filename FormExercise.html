@@ -41,7 +41,7 @@
 <script>
     let showResult = () => {
         let name = document.getElementById('name').value
-        let price = document.getElementById('price').value
+        let price = parseInt    (document.getElementById('price').value)
         // // console.log(document.getElementsByTagName('input'))
         let condition
         // console.log(document.getElementsByName('cond'))
@@ -59,9 +59,16 @@
             }
         })
 
-        console.log(name, price, condition, ware, cour)
-
-        
+        // console.log(name, price, condition, ware, cour)
+        let newDiv = document.createElement('div') // <div></div>
+        newDiv.innerHTML = `
+        1. Name = ${name}<br>
+        2. Price = Rp${price.toLocaleString()}<br>
+        3. Condition = ${condition}<br>
+        4. Warehouse = ${ware}<br>
+        5. Courier = ${cour}
+        `
+        document.getElementsByTagName('p')[0].after(newDiv)
     }
 </script>
 </html>
