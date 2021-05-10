@@ -37,5 +37,3 @@ else if (bulan === 10) {
 else if (bulan === 11) {
     console.log(`${base} 11 : Desember`)
 }
-
-console.log(tanggal.getDay())
