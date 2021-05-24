@@ -130,12 +130,60 @@
     }
 
     let filterNama = (value) => {
-        let filterByNama = products.filter(item => {
-            return item.nama.toLowerCase().includes(value.toLowerCase())
-        })
-        // console.log(filterByNama)
+        let harga1 = document.getElementById("harga-1").value
+        let harga2 = document.getElementById("harga-2").value
+        let kate = document.getElementById("filter-cate").value
 
-        showData(filterByNama)
+        // user hanya isi filter untuk nama
+        if(value && !harga1 && !harga2 && !kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase())
+            })
+            showData(filterByNama)
+        }
+        // user isi filter untuk nama dan min harga
+        else if(value && harga1 && !harga2 && !kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga >= harga1
+            })
+            showData(filterByNama)
+        }
+        //user isi filter untuk nama dan max harga
+        else if(value && !harga1 && harga2 && !kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga <= harga2
+            })
+            showData(filterByNama)
+        }
+        //user isi filter untuk nama, min harga dan kate
+        else if(value && harga1 && !harga2 && kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga >= harga1 && item.kate === kate
+            })
+            showData(filterByNama)
+        }
+        //user isi filter untuk nama, min harga dan kate
+        else if(value && !harga1 && harga2 && kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga <= harga2 && item.kate === kate
+            })
+            showData(filterByNama)
+        }
+        //user isi filter untuk nama, min harga dan max harga
+        else if(value && harga1 && harga2 && !kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga >= harga1 && item.harga <= harga2
+            })
+            showData(filterByNama)
+        }
+        // user isi semuanya
+        else if(value && harga1 && harga2 && kate) {
+            let filterByNama = products.filter(item => {
+                return item.nama.toLowerCase().includes(value.toLowerCase()) && item.harga >= harga1 && item.harga <= harga2 && item.kate === kate
+            })
+            showData(filterByNama)
+        }
+
     }
 
     let filterHarga = () => {
