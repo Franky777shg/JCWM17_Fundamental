@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market V2.0</title>
 </head>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    #table-input input,
+    select {
+        margin: 5px;
+    }
+
+    table {
+        width: 40%;
+    }
+</style>
+
 <body>
-    <center><h1>MARKET V2.0</h1></center>
+    <center>
+        <h1>MARKET V2.0</h1>
+    </center>
     <fieldset>
         <legend>Filter</legend>
         <label for="filter-nama">Nama: </label>
@@ -29,5 +50,84 @@
         <br><br>
         <button>Reset</button>
     </fieldset>
+    <fieldset>
+        <legend>Input Data</legend>
+        <table id="table-input">
+            <tr>
+                <td>
+                    <input type="text" id="nama" placeholder="Nama">
+                </td>
+                <td>
+                    <input type="number" id="harga" placeholder="Harga">
+                </td>
+                <td>
+                    <select id="kate">
+                        <option value="">All</option>
+                        <option value="Fast Food">Fast Food</option>
+                        <option value="Electronic">Electronic</option>
+                        <option value="Cloth">Cloth</option>
+                        <option value="Fruit">Fruit</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" id="stok" placeholder="Stok">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <button onclick="inputData()">Input</button>
+    </fieldset>
+    <fieldset>
+        <legend>Table Data</legend>
+        <table id="table-data">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Kategori</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </fieldset>
 </body>
+<script src="./database.js"></script>
+<script>
+    let showData = (data) => {
+        // get DOM access to tbody in table-data
+        let tbody = document.getElementById("table-data").tBodies[0]
+
+        let res = ''
+        data.forEach(item => {
+            res += `
+            <tr>
+                <td><center>${item.id}</center></td>
+                <td><center>${item.kate}</center></td>
+                <td><center>${item.nama}</center></td>
+                <td><center>${item.harga}</center></td>
+                <td><center>${item.stok}</center></td>
+            </tr>
+            `
+        })
+
+        tbody.innerHTML = res
+    }
+
+    showData(products)
+
+    let inputData = () => {
+        let nama = document.getElementById("nama").value
+        let harga = +document.getElementById("harga").value
+        let kate = document.getElementById("kate").value
+        let stok = +document.getElementById("stok").value
+        let id = Date.now()
+        // console.log(nama,harga,kate,stok,id)
+
+        products.push(new Product(id, kate, nama, harga, stok))
+        showData(products)
+    }
+</script>
+
 </html>
