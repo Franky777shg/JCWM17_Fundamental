@@ -48,7 +48,7 @@
             <option value="Fruit">Fruit</option>
         </select>
         <br><br>
-        <button>Reset</button>
+        <button onclick="onReset()">Reset</button>
     </fieldset>
     <fieldset>
         <legend>Input Data</legend>
@@ -171,6 +171,10 @@
             return item.kate === kate
         })
         showData(filterByKate)
+    }
+
+    let onReset = () => {
+        showData(products)
     }
 
 
