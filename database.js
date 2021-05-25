@@ -39,7 +39,7 @@ class Product {
     }
 }
 
-let indexEdit = null
+let indexEdit
 
 let cart = [
     // {

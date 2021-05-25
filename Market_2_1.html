@@ -138,6 +138,7 @@
                 <td><input type="text" id="nama-edit" value="${item.nama}"></td>
                 <td><input type="number" id="harga-edit" value="${item.harga}"></td>
                 <td><input type="number" id="stok-edit" value="${item.stok}"></td>
+                <td><center><button onclick="onTambah(${index})" disabled>Tambah</button></center></td>
                 <td><button onclick="onSave(${index})" >Save</button></td>
                 <td><button onclick="onCancel()" >Cancel</button></td>
             </tr>
@@ -257,7 +258,6 @@
         res += `<b>PPN : Rp ${totalPrice / 10}</b><br><br>`
         res += `<b>Total : Rp ${totalPrice + (totalPrice / 10)}</b>`
         div.innerHTML = res
-        // console.log(totalPrice)
     }
 
 </script>
