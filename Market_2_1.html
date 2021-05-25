@@ -209,7 +209,7 @@
 
     let showCart = () => {
         let tbody = document.getElementById("table-cart").tBodies[0]
-        
+
         let res = ''
         cart.forEach((item, index) => {
             res += `
@@ -227,13 +227,34 @@
     }
 
     let onTambah = (index) => {
-        let buyProduct = products[index]
-        buyProduct.qty = 1
-        delete buyProduct.stok
-        // console.log(buyProduct)
+        let buyProduct = { ...products[index] }
 
-        cart.push(buyProduct)
-        // console.log(cart)
+        // untuk mengecek apakah ada data product yang sama di keranjang dengan yang kita mau beli
+        let ada = null
+        cart.forEach(item => {
+            if (item.nama === buyProduct.nama) {
+                ada = 1
+            }
+        })
+        if (ada == 1) {
+            // kalau ada, maka qty kita tambah 1
+            cart.forEach(item => {
+                if (item.nama === buyProduct.nama) {
+                    item.qty += 1
+                }
+            })
+        } else {
+            // kalau tidak ada, maka kita push data baru
+            buyProduct.qty = 1
+            delete buyProduct.stok
+
+            cart.push(buyProduct)
+        }
+
+        // untuk kurangi stok product jika di beli
+        products[index].stok -= 1
+
+        showData(products)
         showCart()
     }
 
@@ -244,7 +265,7 @@
 
     let onPayment = () => {
         let div = document.getElementById("trans")
-        
+
         let res = ''
         cart.forEach(item => {
             let totalPerProduct = item.harga * item.qty
