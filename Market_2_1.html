@@ -20,8 +20,8 @@
         margin: 5px;
     }
 
-    table {
-        width: 40%;
+    #table-data {
+        width: 55%;
     }
 </style>
 
@@ -87,10 +87,14 @@
                     <th>Nama</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
+    </fieldset>
+    <fieldset>
+        <legend>Cart</legend>
     </fieldset>
 </body>
 <script src="./database.js"></script>
@@ -100,16 +104,32 @@
         let tbody = document.getElementById("table-data").tBodies[0]
 
         let res = ''
-        data.forEach(item => {
-            res += `
+        data.forEach((item, index) => {
+            if (index === indexEdit) {
+                res += `
             <tr>
                 <td><center>${item.id}</center></td>
                 <td><center>${item.kate}</center></td>
-                <td><center>${item.nama}</center></td>
-                <td><center>${item.harga}</center></td>
-                <td><center>${item.stok}</center></td>
+                <td><input type="text" id="nama-edit" value="${item.nama}"></td>
+                <td><input type="number" id="harga-edit" value="${item.harga}"></td>
+                <td><input type="number" id="stok-edit" value="${item.stok}"></td>
+                <td><button onclick="onSave(${index})" >Save</button></td>
+                <td><button onclick="onCancel()" >Cancel</button></td>
             </tr>
             `
+            } else {
+                res += `
+                <tr>
+                    <td><center>${item.id}</center></td>
+                    <td><center>${item.kate}</center></td>
+                    <td><center>${item.nama}</center></td>
+                    <td><center>${item.harga}</center></td>
+                    <td><center>${item.stok}</center></td>
+                    <td><button onclick="onDelete(${index})" >Delete</button></td>
+                    <td><button onclick="onEdit(${index})" >Edit</button></td>
+                </tr>
+                `
+            }
         })
 
         tbody.innerHTML = res
@@ -130,5 +150,35 @@
     }
 </script>
 <script src="./filter.js"></script>
+<script>
+    let onEdit = (index) => {
+        indexEdit = index
+        showData(products)
+    }
+
+    let onCancel = () => {
+        indexEdit = null
+        showData(products)
+    }
+
+    let onDelete = (index) => {
+        products.splice(index, 1)
+        showData(products)
+    }
+
+    let onSave = (index) => {
+        let newNama = document.getElementById("nama-edit").value
+        let newHarga = document.getElementById("harga-edit").value
+        let newStok = document.getElementById("stok-edit").value
+        // let newId = Date.now()
+        products[index].nama = newNama
+        products[index].harga = newHarga
+        products[index].stok = newStok
+        // products[index].id = newId
+
+        indexEdit = null
+        showData(products)
+    }
+</script>
 
 </html>

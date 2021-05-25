@@ -7,7 +7,7 @@ let products = [
         stok: 9
     },
     {
-        id: 1621890331864,
+        id: 1621890331864, // 1621890331864
         kate: "Electronic",
         nama: "Headset",
         harga: 300000,
@@ -38,3 +38,5 @@ class Product {
         this.stok = stok
     }
 }
+
+let indexEdit = null // = 0
