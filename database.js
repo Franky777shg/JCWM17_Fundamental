@@ -7,7 +7,7 @@ let products = [
         stok: 9
     },
     {
-        id: 1621890331864, // 1621890331864
+        id: 1621890331864,
         kate: "Electronic",
         nama: "Headset",
         harga: 300000,
@@ -39,4 +39,23 @@ class Product {
     }
 }
 
-let indexEdit = null // = 0
+let indexEdit = null
+
+let cart = [
+    // {
+    //     id: 1621889363823,
+    //     kate: "Cloth",
+    //     nama: "Hoodie",
+    //     harga: 150000,
+    //     qty: 7
+    // },
+    // {
+    //     id: 1621872343860,
+    //     kate: "Fruit",
+    //     nama: "Apple",
+    //     harga: 10000,
+    //     qty: 8
+    // }
+]
+
+let totalPrice = 0

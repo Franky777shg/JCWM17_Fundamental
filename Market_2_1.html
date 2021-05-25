@@ -23,6 +23,10 @@
     #table-data {
         width: 55%;
     }
+
+    #table-cart {
+        width: 40%;
+    }
 </style>
 
 <body>
@@ -87,6 +91,7 @@
                     <th>Nama</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th>Beli</th>
                     <th colspan="2">Action</th>
                 </tr>
             </thead>
@@ -95,6 +100,26 @@
     </fieldset>
     <fieldset>
         <legend>Cart</legend>
+        <table id="table-cart">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Kategori</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Qty</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <br>
+        <button onclick="onPayment()">Payment</button>
+    </fieldset>
+    <fieldset>
+        <legend>Payment</legend>
+        <h2>Transaction Detail</h2>
+        <div id="trans"></div>
     </fieldset>
 </body>
 <script src="./database.js"></script>
@@ -125,8 +150,9 @@
                     <td><center>${item.nama}</center></td>
                     <td><center>${item.harga}</center></td>
                     <td><center>${item.stok}</center></td>
-                    <td><button onclick="onDelete(${index})" >Delete</button></td>
-                    <td><button onclick="onEdit(${index})" >Edit</button></td>
+                    <td><center><button onclick="onTambah(${index})" >Tambah</button></center></td>
+                    <td><center><button onclick="onDelete(${index})" >Delete</button></center></td>
+                    <td><center><button onclick="onEdit(${index})" >Edit</button></center></td>
                 </tr>
                 `
             }
@@ -179,6 +205,61 @@
         indexEdit = null
         showData(products)
     }
+
+    let showCart = () => {
+        let tbody = document.getElementById("table-cart").tBodies[0]
+        
+        let res = ''
+        cart.forEach((item, index) => {
+            res += `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.kate}</td>
+                <td>${item.nama}</td>
+                <td>${item.harga}</td>
+                <td>${item.qty}</td>
+                <td><button onclick="onDeleteCart(${index})" >Delete</button></td>
+            </tr>
+            `
+        })
+        tbody.innerHTML = res
+    }
+
+    let onTambah = (index) => {
+        let buyProduct = products[index]
+        buyProduct.qty = 1
+        delete buyProduct.stok
+        // console.log(buyProduct)
+
+        cart.push(buyProduct)
+        // console.log(cart)
+        showCart()
+    }
+
+    let onDeleteCart = (ind) => {
+        cart.splice(ind, 1)
+        showCart()
+    }
+
+    let onPayment = () => {
+        let div = document.getElementById("trans")
+        
+        let res = ''
+        cart.forEach(item => {
+            let totalPerProduct = item.harga * item.qty
+            totalPrice += totalPerProduct
+
+            res += `
+            <p>${item.kate} | ${item.nama} | Rp ${item.harga} X ${item.qty} = Rp ${item.harga * item.qty}</p>
+            `
+        })
+        res += `<b>Sub Total : Rp ${totalPrice}</b><br><br>`
+        res += `<b>PPN : Rp ${totalPrice / 10}</b><br><br>`
+        res += `<b>Total : Rp ${totalPrice + (totalPrice / 10)}</b>`
+        div.innerHTML = res
+        // console.log(totalPrice)
+    }
+
 </script>
 
 </html>
