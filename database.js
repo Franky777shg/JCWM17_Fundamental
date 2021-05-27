@@ -47,7 +47,7 @@ let cart = [
     //     kate: "Cloth",
     //     nama: "Hoodie",
     //     harga: 150000,
-    //     qty: 7
+    //     qty: 0
     // },
     // {
     //     id: 1621872343860,
@@ -59,3 +59,5 @@ let cart = [
 ]
 
 let totalPrice = 0
+
+let payment = false

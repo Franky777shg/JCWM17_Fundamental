@@ -143,7 +143,11 @@
                 <td><button onclick="onCancel()" >Cancel</button></td>
             </tr>
             `
-            } else {
+            }
+            else if (item.stok === 0) {
+                res += ''
+            }
+            else {
                 res += `
                 <tr>
                     <td><center>${item.id}</center></td>
@@ -209,19 +213,35 @@
 
     let showCart = () => {
         let tbody = document.getElementById("table-cart").tBodies[0]
-
         let res = ''
         cart.forEach((item, index) => {
-            res += `
-            <tr>
-                <td>${item.id}</td>
-                <td>${item.kate}</td>
-                <td>${item.nama}</td>
-                <td>${item.harga}</td>
-                <td>${item.qty}</td>
-                <td><button onclick="onDeleteCart(${index})" >Delete</button></td>
-            </tr>
-            `
+            if(item.qty === 0) {
+                res += ''
+            }
+            else if(payment === true) {
+                res += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.kate}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.harga}</td>
+                    <td>${item.qty}</td>
+                    <td><button onclick="onDeleteCart(${index})" disabled>Delete</button></td>
+                </tr>
+                `
+            } 
+            else {
+                res += `
+                <tr>
+                    <td>${item.id}</td>
+                    <td>${item.kate}</td>
+                    <td>${item.nama}</td>
+                    <td>${item.harga}</td>
+                    <td>${item.qty}</td>
+                    <td><button onclick="onDeleteCart(${index})" >Delete</button></td>
+                </tr>
+                `
+            }
         })
         tbody.innerHTML = res
     }
@@ -259,22 +279,36 @@
     }
 
     let onDeleteCart = (ind) => {
-        cart.splice(ind, 1)
+        cart[ind].qty -= 1
         showCart()
+
+        products.forEach(item => {
+            if(item.nama === cart[ind].nama) {
+                item.stok += 1
+            }
+        })
+        showData(products)
     }
 
     let onPayment = () => {
         let div = document.getElementById("trans")
+        payment = true
+        showCart()
 
         let res = ''
         cart.forEach(item => {
             let totalPerProduct = item.harga * item.qty
             totalPrice += totalPerProduct
 
-            res += `
-            <p>${item.kate} | ${item.nama} | Rp ${item.harga} X ${item.qty} = Rp ${item.harga * item.qty}</p>
-            `
+            if(item.qty === 0) {
+                res += ''
+            } else {
+                res += `
+                <p>${item.kate} | ${item.nama} | Rp ${item.harga} X ${item.qty} = Rp ${item.harga * item.qty}</p>
+                `
+            }
         })
+
         res += `<b>Sub Total : Rp ${totalPrice}</b><br><br>`
         res += `<b>PPN : Rp ${totalPrice / 10}</b><br><br>`
         res += `<b>Total : Rp ${totalPrice + (totalPrice / 10)}</b>`

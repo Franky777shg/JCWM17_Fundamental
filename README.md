@@ -6,6 +6,7 @@ Lesson Today:
 <li>Filter Data by Name, Price, Category</li>
 <li>Delete and Edit Data Product</li>
 <li>Add to Cart</li>
-<li>Delete Data Product in Cart</li>
+<li>Delete Data Product in User Cart</li>
+<li>Stock Completed</li>
 <li>Show Transaction Detail</li>
 </ol>
