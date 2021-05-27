@@ -16,3 +16,9 @@ let sum = (a, b) => {
 }
 
 console.log(sum(2, 3))
+
+//##########################################################
+let arr = [1, 2, 3]
+arr.forEach((item, index) => { // callback
+    console.log(item, index)
+})
